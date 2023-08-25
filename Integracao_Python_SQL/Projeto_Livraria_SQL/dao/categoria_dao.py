@@ -1,15 +1,24 @@
 from model.categoria import Categoria
+from database.conexao_factory import ConexaoFactory
 
 class CategoriaDAO:
 
     def __init__(self):
         self.__categorias: list[Categoria] = list()
+        self.__conexao_factory = ConexaoFactory()
 
     def listar(self) -> list[Categoria]:
         return self.__categorias
 
     def adicionar(self, categoria: Categoria) -> None:
-        self.__categorias.append(categoria)
+        # self.__categorias.append(categoria)
+        conexao = self.__conexao_factory.get_conexao()
+        # o cursor é o ponteiro que sabe navegar e inserir dados no meu banco de dados
+        cursor = conexao.cursor()
+        cursor.execute(f"INSERT INTO categorias (nome) VALUES ('{categoria.nome}')")
+
+        # Os comandos acima estão sendo feitos manualmente para entendermos como funciona por de baixo dos panos. o Django por exemplo, faz isso de forma automática.
+        # Em alguns momentos é interessante fazer comandos manuais para que seja mais performático.
 
     def remover(self, categoria_id: int) -> bool:
         encontrado = False
