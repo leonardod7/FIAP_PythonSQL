@@ -1,12 +1,13 @@
 class Categoria:
 
-    def __init__(self, id: int, nome: str):
+    # Fizemos um ajuste no parâmetro id: int, onde será criado automaticamente. O Postgree vai criar o ID, artificialmente.
+    def __init__(self, nome: str, id: int=0): # precisamos passar primeiro os parâmetros com valores definidos.
         self.__id: int = id
         self.__nome: str = nome
 
     @property
     def id(self) -> int:
-        return self.__id
+        return f'{self.__id} | {self.__nome}'
     
     @id.setter
     def id(self, id: int):
