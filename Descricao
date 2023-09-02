@@ -5,3 +5,17 @@ O projeto conecta com o https://api.elephantsql.com/console/3446ac2a-6467-4bae-8
 O banco de dados que está no elephant pode ser visualizado através do DBeaver localmente. Visualizamos as modificações
 referentes aos comandos de inserir, remover e modificar o banco de dados.
 
+
+
+Conexão do Datase do PyCharm com o elephantSQL: https://api.elephantsql.com/console/3446ac2a-6467-4bae-842a-1c0f207bb50b/details
+
+
+utilizar as credenciais:
+
+Obs.: Validar essas credenciais abaixo conforme link acima, pois podemos atualizar e modificar.
+
+Host: silly.db.elephantsql.com
+User: xdyfjsoa
+Password: cG0TJOndDJATCseRbtVaVWy8b4NDwPkH
+URL: jdbc:postgres://xdyfjsoa:cG0TJOndDJATCseRbtVaVWy8b4NDwPkH@silly.db.elephantsql.com/xdyfjsoa
+Port: 5432
