@@ -1,6 +1,6 @@
 class Editora:
 
-    def __init__(self, nome: str, endereco: str, telefone: str, id: int=0):
+    def __init__(self, nome: str, endereco: str, telefone: str, id=0):
         self.__id: int = id
         self.__nome: str = nome
         self.__endereco: str = endereco
@@ -37,3 +37,5 @@ class Editora:
     @telefone.setter
     def telefone(self, telefone):
         self.__telefone = telefone
+
+

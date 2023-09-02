@@ -4,21 +4,24 @@ from database.conexao_factory import ConexaoFactory
 class EditoraDAO:
 
     def __init__(self):
-        self.__editoras: list[Editora] = list()
         self.__conexao_factory = ConexaoFactory()  # Abrindo conexão
 
     def listar(self) -> list[Editora]:
         editoras = list()
         conexao = self.__conexao_factory.get_conexao()  # Pedir conexão
         cursor = conexao.cursor()  # o cursor é o ponteiro que sabe navegar e inserir dados no meu banco de dados
-        cursor.execute(f"SELECT id, nome, endereco, telefone FROM editoras")
+        cursor.execute(f"SELECT nome, endereco, telefone, id FROM editoras")
         resultados = cursor.fetchall() # ele retorna os itens que está dentro do SELECT
         for resultado in resultados:
             # ID e Nome da tupla (quantidade de atributos da tabela no SQL) lembrando que o ID precisa ir por último,
             # pois ele é uma chave artificial criada automaticamente pelo SQL. Outra observação é que os valores são referentes
             # à posição dos atributos da tabela, que no caso, como são retornados no python, começam em 0
-            editora = Editora(resultado[1], resultado[2], resultado[3], resultado[0])
+            editora = Editora(resultado[0], resultado[1], resultado[2], resultado[3])
             editoras.append(editora)
+
+        cursor.close()
+        conexao.close()
+
         return self.__editoras
 
     def adicionar(self, editora: Editora) -> None:
@@ -48,20 +51,14 @@ class EditoraDAO:
         edt = None
         conexao = self.__conexao_factory.get_conexao()  # Pedir conexão
         cursor = conexao.cursor()  # o cursor é o ponteiro que sabe navegar e inserir dados no meu banco de dados
-        cursor.execute(f"SELECT id, nome, endereco, telefone FROM editoras WHERE id = %s", (editora_id))  # o %s é uma das formas de construir string dentro do python
+        cursor.execute(f"SELECT nome, endereco, telefone, id FROM editoras WHERE id = %s", (editora_id))  # o %s é uma das formas de construir string dentro do python
         resultado = cursor.fetchone()
         if (resultado):
-            edt = Editora(resultado[1],resultado[2],resultado[3], resultado[0])
+            edt = Editora(resultado[0],resultado[1],resultado[2], resultado[3])
         cursor.close()
         conexao.close()
 
         return edt
     
-    def ultimo_id(self) -> int:
-        index = len(self.__editoras) -1
-        if (index == -1):
-            id = 0
-        else:
-            id = self.__editoras[index].id
-        return id
+
     

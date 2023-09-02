@@ -11,14 +11,14 @@ class CategoriaDAO:
         categorias = list()
         conexao = self.__conexao_factory.get_conexao()  # Pedir conexão
         cursor = conexao.cursor()  # o cursor é o ponteiro que sabe navegar e inserir dados no meu banco de dados
-        cursor.execute(f"SELECT id, nome FROM categorias")
+        cursor.execute(f"SELECT id, nome FROM categorias") # as posicoes da chamada precisam estar conforme as posicoes do construtor init em categoria.py
         resultados = cursor.fetchall() # ele retorna os itens que está dentro do SELECT
         # print(resultados)
         for resultado in resultados:
             # ID e Nome da tupla (quantidade de atributos da tabela no SQL) lembrando que o ID precisa ir por último,
             # pois ele é uma chave artificial criada automaticamente pelo SQL. Outra observação é que os valores são referentes
             # à posição dos atributos da tabela, que no caso, como são retornados no python, começam em 0
-            cat = Categoria(resultado[1], resultado[0])
+            cat = Categoria(resultado[0], resultado[1])
             categorias.append(cat)
 
         cursor.close()
@@ -59,14 +59,7 @@ class CategoriaDAO:
         conexao.close()
 
         return cat
-    
-    def ultimo_id(self) -> int:
-        index = len(self.__categorias) -1
-        if (index == -1):
-            id = 0
-        else:
-            id = self.__categorias[index].id
-        return id
+
 
 
 # poderíamos por exemplo criar uma nova classe para instanciar a conexão com o banco, ou um método separado dentro da classe categoriaDAO

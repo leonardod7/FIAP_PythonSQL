@@ -1,2 +1,7 @@
-Esse projeto visa a integração do Python com o SQL
+Esse projeto visa a integração do Python com o SQL.
+
+O projeto conecta com o https://api.elephantsql.com/console/3446ac2a-6467-4bae-842a-1c0f207bb50b/details
+
+O banco de dados que está no elephant pode ser visualizado através do DBeaver localmente. Visualizamos as modificações
+referentes aos comandos de inserir, remover e modificar o banco de dados.
 
